@@ -15,12 +15,17 @@ jobs:
       uses: actions/cache@v4
       id: cache
       with:
-        path: ~/.conan2/
+        path: |
+          ~/.conan2/
+          ${{github.workspace}}/conan
+          
+          
         key: ${{ runner.os }}-dependencies
 
     - name: install conan
       run: |
-        pip install conan
+        wget https://github.com/conan-io/conan/releases/download/2.0.17/conan-linux-64.tar.gz
+        tar -xvf conan-linux-64.tar.gz
         conan profile detect --force
 
     - name: install conan packages
