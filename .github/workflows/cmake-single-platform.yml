@@ -42,8 +42,8 @@ jobs:
       run: |
         sudo apt install build-essential
         pwd
-        ls build/generators
-         cmake --preset conan-release
+        cmake --version
+        cmake --preset conan-release
 
     - name: Build
       # Build your program with the given configuration
