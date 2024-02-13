@@ -12,17 +12,15 @@ jobs:
       uses: actions/cache@v4
       id: cache
       with:
-        path: ${{ github.workspace }}/${{ env.INSTALL_LOCATION }}
+        path: ~/.conan2/p
         key: ${{ runner.os }}-dependencies
 
     - name: install conan
       run: |
         pip install conan
         conan profile detect --force
-        ls -a
-        ls ~ -a
 
     - name: install conan packages
-      if: ${{ steps.cache.output.cache-hit != 'true' }}
+    #  if: ${{ steps.cache.output.cache-hit != 'true' }}
       run: conan install conanfile.txt --build=missing
             
