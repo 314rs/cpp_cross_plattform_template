@@ -23,6 +23,7 @@ jobs:
     - name: install conan
       run: | 
         pip install conan
+        conan profile detect --force
         pwd
         ls -lhs
 
