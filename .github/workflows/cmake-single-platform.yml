@@ -32,7 +32,7 @@ jobs:
     - name: run conan
       if: ${{ steps.cache.output.cache-hit != 'true' }}
       run: |
-        apt install conan
+        sudo apt install conan
         conan install conanfile.txt --build=missing
 
     - name: Configure CMake
