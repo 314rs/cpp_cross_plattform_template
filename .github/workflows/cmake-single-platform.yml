@@ -33,6 +33,7 @@ jobs:
       if: ${{ steps.cache.output.cache-hit != 'true' }}
       run: |
         pip install conan
+        conan profile detect --force
         conan install conanfile.txt --build=missing
 
     - name: Configure CMake
