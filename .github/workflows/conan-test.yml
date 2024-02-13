@@ -18,10 +18,13 @@ jobs:
         path: ~/.conan2/
         key: ${{ runner.os }}-dependencies
 
+    - name: setup pip
+      uses: actions/setup-python@v5
+      with:
+        cache: 'pip' # caching pip dependencies
+        
     - name: install conan
-      run: |
-        pip install conan
-        conan profile detect --force
+      run: pip install conan
 
     - name: install conan packages
     #  if: ${{ steps.cache.output.cache-hit != 'true' }}
