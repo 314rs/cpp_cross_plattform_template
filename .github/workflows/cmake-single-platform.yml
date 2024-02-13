@@ -42,8 +42,8 @@ jobs:
       run: |
         sudo apt install build-essential
         pwd
-        ls
-        cmake -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -DCMAKE_TOOLCHAIN_FILE=./build/generators/conan_toolchain.cmake
+        ls build/generators
+        cmake -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -DCMAKE_TOOLCHAIN_FILE=build/generators/conan_toolchain.cmake
 
     - name: Build
       # Build your program with the given configuration
