@@ -26,15 +26,17 @@ jobs:
       uses: actions/cache@v4
       id: cache
       with:
-        path: ${{ github.workspace }}/${{ env.INSTALL_LOCATION }}
+        path: ~/.conan2/
         key: ${{ runner.os }}-dependencies
 
-    - name: run conan
-      if: ${{ steps.cache.output.cache-hit != 'true' }}
+    - name: install conan
       run: |
         pip install conan
         conan profile detect --force
-        conan install conanfile.txt --build=missing
+        
+    - name: install conan packages
+    #  if: ${{ steps.cache.output.cache-hit != 'true' }}
+      run: conan install conanfile.txt --build=missing
 
     - name: Configure CMake
       # Configure CMake in a 'build' subdirectory. `CMAKE_BUILD_TYPE` is only required if you are using a single-configuration generator such as make.
