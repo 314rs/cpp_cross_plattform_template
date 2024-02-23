@@ -1,7 +1,7 @@
 name: test conan
 
 on:
-    workflow_dispatch:
+  workflow_dispatch:
 
 
 jobs:
