@@ -5,30 +5,16 @@ set(MY_PROJECT_NAME "CPP_TEMPLATE")
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 project(
-	MY_PROJECT_NAME
+  MY_PROJECT_NAME
 	VERSION 0.1.0
 	LANGUAGES CXX
-)
-
+  )
+  
 find_package(GTest REQUIRED)
 find_package(SQLite3 REQUIRED)
 find_package(Boost REQUIRED)
 find_package(fmt REQUIRED)
 find_package(spdlog REQUIRED)
-
-add_executable(MY_PROJECT_NAME src/main.cpp)
-target_link_libraries(MY_PROJECT_NAME gtest::gtest)
-target_link_libraries(MY_PROJECT_NAME SQLite::SQLite3)
-target_link_libraries(MY_PROJECT_NAME Boost::boost)
-
-
-
-
-
-# Prevent building in the source directory
-if(PROJECT_SOURCE_DIR STREQUAL PROJECT_BINARY_DIR)
-	message(FATAL_ERROR "In-source builds not allowed. Please make a new directory (called a build directory) and run CMake from there.\n")
-endif()
 
 if (GCC)
 
@@ -60,29 +46,46 @@ if (GCC)
 
 elseif(MSVC)
 
-   add_compile_options(/permissive-) # Enforces standards conformance.
-   add_compile_options(/W4) # All reasonable warnings
-   add_compile_options(/w14640) # Enable warning on thread unsafe static member initialization
-   # use these and consider the following (see descriptions below)
-   add_compile_options(/w14242) # 'identfier': conversion from 'type1' to 'type1', possible loss of data
-   add_compile_options(/w14254) # 'operator': conversion from 'type1:field_bits' to 'type2:field_bits', possible loss of data
-   add_compile_options(/w14263) # 'function': member function does not override any base class virtual member function
-   add_compile_options(/w14265) # 'classname': class has virtual functions, but destructor is not virtual instances of this class may not be destructed correctly
-   add_compile_options(/w14287) # 'operator': unsigned/negative constant mismatch
-   add_compile_options(/we4289) # nonstandard extension used: 'variable': loop control variable declared in the for-loop is used outside the for-loop scope
-   add_compile_options(/w14296) # 'operator': expression is always 'boolean_value'
-   add_compile_options(/w14311) # 'variable': pointer truncation from 'type1' to 'type2'
-   add_compile_options(/w14545) # expression before comma evaluates to a function which is missing an argument list
-   add_compile_options(/w14546) # function call before comma missing argument list
-   add_compile_options(/w14547) # 'operator': operator before comma has no effect; expected operator with side-effect
-   add_compile_options(/w14549) # 'operator': operator before comma has no effect; did you intend 'operator'?
-   add_compile_options(/w14555) # expression has no effect; expected expression with side-effect
-   add_compile_options(/w14619) # pragma warning: there is no warning number 'number'
-   add_compile_options(/w14826) # Conversion from 'type1' to 'type_2' is sign-extended. This may cause unexpected runtime behavior.
-   add_compile_options(/w14905) # wide string literal cast to 'LPSTR'
-   add_compile_options(/w14906) # string literal cast to 'LPWSTR'
-   add_compile_options(/w14928) # illegal copy-initialization; more than one user-defined conversion has been implicitly applied
+  add_compile_definitions(_WIN32_WINNT=0x0601)  # windows feature magic happening here (just here to avoid compiler warning from boost??)
+
+    add_compile_options(/permissive-) # Enforces standards conformance.
+    add_compile_options(/W4) # All reasonable warnings
+    add_compile_options(/w14640) # Enable warning on thread unsafe static member initialization
+    # use these and consider the following (see descriptions below)
+    add_compile_options(/w14242) # 'identfier': conversion from 'type1' to 'type1', possible loss of data
+    add_compile_options(/w14254) # 'operator': conversion from 'type1:field_bits' to 'type2:field_bits', possible loss of data
+    add_compile_options(/w14263) # 'function': member function does not override any base class virtual member function
+    add_compile_options(/w14265) # 'classname': class has virtual functions, but destructor is not virtual instances of this class may not be destructed correctly
+    add_compile_options(/w14287) # 'operator': unsigned/negative constant mismatch
+    add_compile_options(/we4289) # nonstandard extension used: 'variable': loop control variable declared in the for-loop is used outside the for-loop scope
+    add_compile_options(/w14296) # 'operator': expression is always 'boolean_value'
+    add_compile_options(/w14311) # 'variable': pointer truncation from 'type1' to 'type2'
+    add_compile_options(/w14545) # expression before comma evaluates to a function which is missing an argument list
+    add_compile_options(/w14546) # function call before comma missing argument list
+    add_compile_options(/w14547) # 'operator': operator before comma has no effect; expected operator with side-effect
+    add_compile_options(/w14549) # 'operator': operator before comma has no effect; did you intend 'operator'?
+    add_compile_options(/w14555) # expression has no effect; expected expression with side-effect
+    add_compile_options(/w14619) # pragma warning: there is no warning number 'number'
+    add_compile_options(/w14826) # Conversion from 'type1' to 'type_2' is sign-extended. This may cause unexpected runtime behavior.
+    add_compile_options(/w14905) # wide string literal cast to 'LPSTR'
+    add_compile_options(/w14906) # string literal cast to 'LPWSTR'
+    add_compile_options(/w14928) # illegal copy-initialization; more than one user-defined conversion has been implicitly applied
 endif()
+
+add_executable(MY_PROJECT_NAME src/main.cpp)
+target_link_libraries(MY_PROJECT_NAME gtest::gtest)
+target_link_libraries(MY_PROJECT_NAME SQLite::SQLite3)
+target_link_libraries(MY_PROJECT_NAME Boost::boost)
+
+
+
+
+
+# Prevent building in the source directory
+if(PROJECT_SOURCE_DIR STREQUAL PROJECT_BINARY_DIR)
+	message(FATAL_ERROR "In-source builds not allowed. Please make a new directory (called a build directory) and run CMake from there.\n")
+endif()
+
 
 
 
@@ -97,6 +100,12 @@ add_test(NAME testMainReturns COMMAND MY_PROJECT_NAME)
 
 add_test(NAME testMainOuput COMMAND MY_PROJECT_NAME)
 set_property(TEST testMainOuput PROPERTY PASS_REGULAR_EXPRESSION "Hello World!")
+
+add_compile_options(-DCMAKE_EXPORT_COMPILE_COMMANDS=ON)
+set(CMAKE_CXX_CLANG_TIDY
+  clang-tidy-11;
+  -header-filter=${CMAKE_CURRENT_SOURCE_DIR};
+)
 
 gtest_discover_tests(mainTest TEST_PREFIX gtest.)
 gtest_discover_tests(MY_PROJECT_NAME)
