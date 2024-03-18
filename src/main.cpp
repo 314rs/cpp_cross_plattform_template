@@ -3,9 +3,9 @@
 #include <gtest/gtest.h>
 #include <boost/beast.hpp>
 
-int main(int argc, char const *argv[])
+int main(void)
 {
-    
+    int unused;
     std::cout << "Hello World!" << std::endl;
     return 0;
 }
