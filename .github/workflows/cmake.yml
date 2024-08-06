@@ -49,6 +49,7 @@ jobs:
     - name: conan
       run: | 
         pip install conan
+        conan --version
         conan profile detect --force
         conan install conanfile.txt --build=missing
 
