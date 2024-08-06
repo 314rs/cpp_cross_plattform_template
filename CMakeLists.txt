@@ -30,18 +30,26 @@ find_package(GTest REQUIRED)
 # find_package(fmt REQUIRED)
 # find_package(spdlog REQUIRED)
 
+# main
 add_executable(${MY_PROJECT_NAME} src/main.cpp)
 set_target_properties(${MY_PROJECT_NAME} PROPERTIES OUTPUT_NAME "${MY_PROJECT_NAME}-${GIT_VERSION_STRING}")
 target_link_libraries(${MY_PROJECT_NAME} gtest::gtest)
 target_link_libraries(${MY_PROJECT_NAME} boost::boost)
 # target_link_libraries(${MY_PROJECT_NAME} SQLite::SQLite3)
 
+add_executable(main.test ./src/main.test.cpp)
+set_target_properties(main.test PROPERTIES OUTPUT_NAME "main.test-${GIT_VERSION_STRING}")
+target_link_libraries(main.test GTest::gtest_main)
+
+
+# fizzbuzz
 add_executable(fizzbuzz ./src/fizzbuzz.cpp)
 set_target_properties(fizzbuzz PROPERTIES OUTPUT_NAME "fizzbuzz-${GIT_VERSION_STRING}")
 target_link_libraries(fizzbuzz boost::boost)
+
 add_executable(fizzbuzz.test ./src/fizzbuzz.test.cpp)
 target_link_libraries(fizzbuzz.test gtest::gtest)
-set_target_properties(fizzbuzz PROPERTIES OUTPUT_NAME "fizzbuzz.test-${GIT_VERSION_STRING}")
+set_target_properties(fizzbuzz.test PROPERTIES OUTPUT_NAME "fizzbuzz.test-${GIT_VERSION_STRING}")
 
 
 if(CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
@@ -107,9 +115,6 @@ endif()
 # Testing
 include(CTest)
 include(GoogleTest)
-
-add_executable(main.test ./src/main.test.cpp)
-target_link_libraries(main.test GTest::gtest_main)
 
 add_test(NAME ctestMainReturns COMMAND "${MY_PROJECT_NAME}-${GIT_VERSION_STRING}")
 
