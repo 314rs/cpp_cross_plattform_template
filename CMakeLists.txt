@@ -51,7 +51,6 @@ add_executable(fizzbuzz.test ./src/fizzbuzz.test.cpp)
 target_link_libraries(fizzbuzz.test gtest::gtest)
 set_target_properties(fizzbuzz.test PROPERTIES OUTPUT_NAME "fizzbuzz.test-${GIT_VERSION_STRING}")
 
-
 if(CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
 	add_compile_options(-pedantic) # Warn on language extensions
 	add_compile_options(-Wall) # -Wextra reasonable and standard
@@ -126,7 +125,7 @@ set(CMAKE_CXX_CLANG_TIDY
 	clang-tidy-11;
 	-header-filter=${CMAKE_CURRENT_SOURCE_DIR};
 )
-add_compile_options(-g -fprofile-arcs -ftest-coverage)
+add_compile_options(-g -fprofile-arcs -ftest-coverage -coverage)
 
 gtest_discover_tests(main.test TEST_PREFIX gtest.)
 gtest_discover_tests(${MY_PROJECT_NAME})
