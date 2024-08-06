@@ -1,6 +1,8 @@
 [Bb]uild/
 [Dd]ocs/
-CMakeCache.*
-CMakeFiles/*
 [Tt]esting/
 [Tt]est/
+CMakeCache.*
+CMakeFiles/*
+CMakePresets.json
+.vscode/
