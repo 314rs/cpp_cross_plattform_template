@@ -52,14 +52,6 @@ jobs:
         conan profile detect --force
         conan install conanfile.txt --build=missing
 
-    - name: install CMake Ubuntu
-      # Configure CMake in a 'build' subdirectory. `CMAKE_BUILD_TYPE` is only required if you are using a single-configuration generator such as make.
-      # See https://cmake.org/cmake/help/latest/variable/CMAKE_BUILD_TYPE.html?highlight=cmake_build_type
-      if: matrix.os == 'ubuntu-latest'
-      run: |
-        sudo apt install build-essential tree
-        pwd
-  
     - name: Build Ubuntu
       if: matrix.os == 'ubuntu-latest'
       # Build your program with the given configuration
@@ -78,7 +70,7 @@ jobs:
         
     - uses: actions/upload-artifact@v4
       with:
-        name: ${{github.repository}}-${{matrix.os}}-binaries
+        name: ${{github.repository.name}}-${{matrix.os}}-binaries
         path: |
           build/Release/
           !build/Release/*test*
