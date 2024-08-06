@@ -6,3 +6,5 @@ CMakeCache.*
 CMakeFiles/*
 CMakePresets.json
 .vscode/
+
+src/version.hpp
