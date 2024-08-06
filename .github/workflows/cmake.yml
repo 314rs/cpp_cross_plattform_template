@@ -78,7 +78,7 @@ jobs:
         
     - uses: actions/upload-artifact@v4
       with:
-        name: ${{matrix.os}}-binaries
+        name: ${{github.repository}}-${{matrix.os}}-binaries
         path: |
           build/Release/
           !build/Release/*test*
