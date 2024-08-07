@@ -28,7 +28,7 @@ int main(int argc, char const *argv[])
 		desc.add_options()
 		("help,h", "help screen, show this message")
 		("version" , "show version number")
-		("number", po::value<int>(), "number to print")
+		("number", po::value<int>(), "number to fizz-buzz")
 		("beginn,b", po::value<int>()->default_value(1), "start number")
 		("end,e", po::value<int>()->default_value(100), "end number")
 		("delimiter,d", po::value<std::string>()->default_value(std::string(", ")), "delimiter");
@@ -42,9 +42,10 @@ int main(int argc, char const *argv[])
 
 		if (vm.count("version")) {
 			std::cout << "version: " << std::string(GIT_VERSION_STRING) << std::endl;
+			return 0;
 		}
 		if (vm.count("help")) {
-			std::cout << desc << '\n' << "developed by Lars Bornträger" << std::endl;
+			std::cout << desc << '\nversion: ' << std::string(GIT_VERSION_STRING) << '\n' << "developed by Lars Bornträger" << std::endl;
 			return 0;
 		}
 	} catch (const po::error &ex) { std::cerr << ex.what() << std::endl; }
