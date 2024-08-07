@@ -9,14 +9,23 @@
 [![GitHub License](https://img.shields.io/github/license/314rs/cpp_cross_plattform_template)](LICENSE.txt)
 ![GitHub Tag](https://img.shields.io/github/v/tag/314rs/cpp_cross_plattform_template?logo=github)
 
-some boilerplate for my C++ projects.
+Some boilerplate for my C++ projects.
 
 with:
 
-- cmake
 - conan
+- cmake
+- ctest + googletest
 - doxygen
 - github actions
+  - cmake + ctest
+  - doxygen -> github pages
+  - CodeQL
+
+For demo purposes this template contains a very simple main and a fizz-buzz implementation. On top there is a ton of CI/CD stuff.
+
+The version tag is auto generated with `git describe --tags --always --dirty=-dev`, which produces something of the form `tag-hash(-dev)` (e.g. `v2.3.3-2-g28ed396-dev`). This string is used as a suffix for executables and in doxygen. Therefore tags with semantic versioning are encuraged.
+
 <!-- delete/change above in actual project -->
 
 ## Download
@@ -56,7 +65,7 @@ Or build it yourself:
 
 ```sh
 git clone https://github.com/jothepro/doxygen-awesome-css.git docs/doxygen-awesome-css
-echo "PROJECT_NUMBER = $(git describe --tags --always --dirty=-dev)" > docs/PROJECT_NUMBER   # always before calling doxygen
+echo "PROJECT_NUMBER = $(git describe --tags --always --dirty=-dev)" > docs/PROJECT_NUMBER # important, always do this before running doxygen
 doxygen
 ```
 

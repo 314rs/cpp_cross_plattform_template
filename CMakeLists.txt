@@ -7,14 +7,14 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 project(
 	${MY_PROJECT_NAME}
-	VERSION 0.1.0
+	VERSION 0.0.0
 	DESCRIPTION "C++ template project"
 	LANGUAGES CXX
 )
 
 # Get the latest commit hash
 execute_process(
-    COMMAND git describe --tags --always --dirty=-dev
+    COMMAND git describe --tags --always --dirty=-dev #--match "v*"
     WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
     OUTPUT_VARIABLE GIT_VERSION_STRING
     OUTPUT_STRIP_TRAILING_WHITESPACE
