@@ -1,8 +1,8 @@
 name: Doxygen
 
 on:
-  # push:
-  #   branches: ["main"]
+  push:
+    branches: ["main"]
   workflow_dispatch:
 
 concurrency:
@@ -27,7 +27,7 @@ jobs:
       - name: get doxygen-awesome-css
         run: git clone https://github.com/jothepro/doxygen-awesome-css.git docs/doxygen-awesome-css
       - name: get project number
-        run: echoo "PROJECT_NUMBER = $(git describe --tags --always --dirty=-dev)" > docs/PROJECT_NUMBER
+        run: echo "PROJECT_NUMBER = $(git describe --tags --always --dirty=-dev)" > docs/PROJECT_NUMBER
       - name: get doxygen
         run: sudo apt install doxygen graphviz 
       - run: doxygen
