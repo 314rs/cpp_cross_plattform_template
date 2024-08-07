@@ -2,6 +2,11 @@
 
 <!-- make shure to adjust all the links! -->
 [![CMake and CTest](https://github.com/314rs/cpp_cross_plattform_template_study/actions/workflows/cmake.yml/badge.svg?branch=main)](https://github.com/314rs/cpp_cross_plattform_template_study/actions/workflows/cmake.yml)
+<!-- todo codecov (coveralls, coverty) -->
+<!-- todo codeql -->
+<!-- todo doxygen tag -->
+[![GitHub License](https://img.shields.io/github/license/314rs/cpp_cross_plattform_template_study)](LICENSE.txt)
+<!-- todo release tag -->
 
 some boilerplate for my C++ projects.
 
