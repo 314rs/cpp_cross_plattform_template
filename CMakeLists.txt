@@ -22,6 +22,7 @@ execute_process(
 
 message(STATUS "GIT_VERSION_STRING: ${GIT_VERSION_STRING}")
 file(WRITE ./src/version.hpp "#pragma once\n#define GIT_VERSION_STRING \"${GIT_VERSION_STRING}\"")
+file(WRITE ./docs/PROJECT_NUMBER "PROJECT_NUMBER = ${GIT_VERSION_STRING}")
 include(./src/version.hpp)
 
 find_package(Boost REQUIRED)

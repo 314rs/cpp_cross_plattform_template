@@ -50,7 +50,14 @@ ctest
 ## Doxygen
 
 Doxygen documentation can be found [here](https://314rs.github.io/cpp_cross_plattform_template/).
-<!-- acually it cannot at the moment. gh-pages are not allowed for private repos -->
+
+Or build it yourself:
+
+```sh
+git clone https://github.com/jothepro/doxygen-awesome-css.git docs/doxygen-awesome-css
+echo "PROJECT_NUMBER = $(git describe --tags --always --dirty=-dev)" > docs/PROJECT_NUMBER   # always before calling doxygen
+doxygen
+```
 
 ## Wiki
 
